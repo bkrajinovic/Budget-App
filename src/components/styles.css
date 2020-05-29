@@ -1,0 +1,11 @@
+#expenses {
+  color: red;
+}
+
+#balance {
+  color: green;
+}
+
+.input {
+  transition: 0.3s ease-out;
+}
