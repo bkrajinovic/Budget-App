@@ -1,33 +1,36 @@
-import React from "react"
+import React, { useContext } from "react"
 import Table from "react-bootstrap/Table"
+import { ExpensesContext } from "../store"
 
 function ExpensesTable() {
+  const { value } = useContext(ExpensesContext)
+
   return (
-    <Table striped bordered hover size="sm">
-      <thead>
+    <Table bordered hover size="sm">
+      <thead style={{ backgroundColor: "gray", color: "white" }}>
         <tr>
           <th>Expenses</th>
           <th>Amount</th>
-          <th>Date</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>School Trip</td>
-          <td style={{color: "red"}}>-200 HRK</td>
-          <td>27-05-2020</td>
-        </tr>
-        <tr>
-          <td>Income</td>
-          <td style={{color: "green"}}>+350 HRK</td>
-          <td>26-05-2020</td>
-        </tr>
-        <tr>
-          <td>Car insurance</td>
-          <td style={{color: "red"}}>-550 HRK</td>
-          <td>26-05-2020</td>
-        </tr>
-      </tbody>
+      {value.expenses.length > 0 ? (
+        value.expenses.map((expense, index) => {
+          return (
+            <tbody key={index}>
+              <tr>
+                <td>{expense.title}</td>
+                <td>{expense.amount}</td>
+              </tr>
+            </tbody>
+          )
+        })
+      ) : (
+        <tbody>
+          <tr>
+            <td>No Listed Expenses</td>
+          </tr>
+        </tbody>
+      )}
     </Table>
   )
 }

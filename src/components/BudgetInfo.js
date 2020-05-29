@@ -1,15 +1,20 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import "./styles.css"
+import { ExpensesContext } from '../store'
 
 
 function BudgetInfo() {
+
+    const {value} = useContext(ExpensesContext) 
+
+
     return (
         <div className="row">
             <div className="col-lg-4">
                 <div className="card">
                     <div className="card-header">Budget</div>
                     <div className="card-body">
-                        <h5 className="text-center card-title" id="budget">10000 HRK</h5>
+                        <h5 className="text-center card-title" id="budget">{value.budget} HRK</h5>
                     </div>
                 </div>
             </div>
