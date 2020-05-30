@@ -19,7 +19,7 @@ function ExpensesTable() {
             <tbody key={index}>
               <tr>
                 <td>{expense.title}</td>
-                <td>{expense.amount}</td>
+                <td style={{color:'red'}}>-{expense.amount} HRK</td>
               </tr>
             </tbody>
           )

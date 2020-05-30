@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
 import { ExpensesContext } from "../store"
 
-function ExpensesInput() {
+function IncomeInput() {
   const { expenses, setValue } = useContext(ExpensesContext)
   const [input, setInput] = useState({
     title: "",
@@ -24,14 +24,14 @@ function ExpensesInput() {
     <div>
       <Form.Group as={Row}>
         <Form.Label column sm={2}>
-          Expenses
+          Income
         </Form.Label>
         <Col sm={10}>
           <Form.Control
             required
             type="text"
             className="input"
-            placeholder="Car insurance"
+            placeholder="Salary"
             value={input.title}
             onChange={(e) => setInput({ ...input, title: e.target.value })}
           />
@@ -69,4 +69,4 @@ function ExpensesInput() {
   )
 }
 
-export default ExpensesInput
+export default IncomeInput

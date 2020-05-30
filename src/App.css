@@ -18,13 +18,17 @@
   border-radius: 10px;
 }
 
-.BudgetInput, .ExpensesInput {
+.BudgetInput, #ExpensesInput, #IncomeInput {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px;
   }
 
-  .ExpensesInput{
+  #ExpensesInput, #IncomeInput{
     margin-top: 50px;
+  }
+
+  #IncomeInput{
+    margin-left: auto;
   }
 
