@@ -27,7 +27,7 @@ function BudgetInfo() {
                 <div className="card">
                     <div className="card-header">Expenses</div>
                     <div className="card-body">
-                        <h5 className="text-center card-title" id="expenses">-{totalExpenses} HRK</h5>
+                        <h5 className="text-center card-title" id="expenses">{(totalExpenses) < 0 ? 0 : (- totalExpenses)} HRK</h5>
                     </div>
                 </div>
             </div>

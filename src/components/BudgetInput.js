@@ -30,7 +30,7 @@ function BudgetInput() {
           <Col sm={10}>
             <Form.Control
               className="input"
-              input="number"
+              type="number"
               placeholder="Your budget"
               value={input.budget}
               onChange={(e)=>setInput({...input, budget:e.target.value})}

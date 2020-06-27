@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import Table from "react-bootstrap/Table"
-import { ExpensesContext } from "../store"
+// import { ExpensesContext } from "../store"
 
 function ExpensesTable() {
   const { value } = useContext(ExpensesContext)
@@ -19,7 +19,16 @@ function ExpensesTable() {
             <tbody key={index}>
               <tr>
                 <td>{expense.title}</td>
-                <td style={{color:'red'}}>-{expense.amount} HRK</td>
+                <td
+                  style={
+                    expense.amount < 0 ? { color: "green" } : { color: "red" }
+                  }
+                >
+                  {expense.amount < 0
+                    ? Math.abs(expense.amount)
+                    : -expense.amount}{" "}
+                  HRK
+                </td>
               </tr>
             </tbody>
           )

@@ -15,7 +15,7 @@ function IncomeInput() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setValue({
-      expenses: [...expenses, { title: input.title, amount: input.amount }],
+      expenses: [...expenses, { title: input.title, amount:-(input.amount) }],
     })
     setInput({ title: "", amount: "" })
   }

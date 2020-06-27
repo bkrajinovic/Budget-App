@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import BudgetInfo from "./components/BudgetInfo"
@@ -8,20 +8,28 @@ import ExpensesInput from "./components/ExpensesInput"
 import IncomeInput from "./components/IncomeInput"
 import ExpensesTable from "./components/ExpensesTable"
 import { ExpensesContext } from "./store"
+import axios from 'axios'
 
 function App() {
   const [budget, setBudget] = useState({
-    budget: 10000,
+    budget: 0,
   })
 
   const [value, setValue] = useState({
-    expenses: [
-      { id: 1, title: "Car insurance", amount: 1000 },
-      { id: 2, title: "Income", amount: 900 },
-      { id: 3, title: "School Trip", amount: 400 },
-    ],
+    expenses: [],
   
   })
+
+  useEffect(() => {
+    axios.get(`http://localhost:3004/data`)
+      .then(res => {
+        const data = res.data.expenses;
+        setValue({ data });
+        console.log({value})
+      })
+  })
+
+
 
   const { expenses } = value
 
