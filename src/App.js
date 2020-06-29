@@ -3,12 +3,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
   useHistory,
   useLocation,
 } from "react-router-dom"
-
 import "./App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import BudgetInfo from "./components/BudgetInfo"
@@ -83,7 +81,7 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        fakeAuth.isAuthenticated ? (
+        localStorage.getItem("loggedin") ? (
           children
         ) : (
           <Redirect
@@ -124,6 +122,7 @@ function Login() {
 
   let login = () => {
     fakeAuth.authenticate(() => {
+      localStorage.setItem("loggedin", true)
       history.replace(from)
     })
   }
@@ -148,7 +147,11 @@ function Login() {
           id="img"
         ></img>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label
+            style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
+          >
+            Email address
+          </Form.Label>
           <Form.Control
             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
             type="email"
@@ -160,7 +163,11 @@ function Login() {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label
+            style={{ color: "white", fontWeight: 400, fontSize: "18px" }}
+          >
+            Password
+          </Form.Label>
           <Form.Control
             // type="password"
             name="password"
@@ -170,7 +177,9 @@ function Login() {
           />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox"></Form.Group>
-        <Button onClick={pass}>Log In</Button>
+        <Button variant="outline-light" onClick={pass}>
+          Log In
+        </Button>
       </Form>
     </div>
   )

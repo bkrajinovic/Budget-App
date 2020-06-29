@@ -18,6 +18,7 @@ function BudgetInput() {
     axios.post("http://localhost:3004/budget", input).then((data) => {
       console.log(data)
     })
+    window.location.reload()
   }
 
   return (

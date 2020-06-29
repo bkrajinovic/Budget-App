@@ -12,48 +12,13 @@
     },
     {
       "id": 3,
-      "title": "gg",
-      "amount": -222
+      "title": "Trosak auta",
+      "amount": -600
     },
     {
       "id": 4,
-      "title": "s",
-      "amount": -2
-    },
-    {
-      "id": 5,
-      "title": "s",
-      "amount": -2
-    },
-    {
-      "title": "a",
-      "amount": -2,
-      "id": 6
-    },
-    {
-      "id": 7,
-      "title": "test",
-      "amount": -123
-    },
-    {
-      "id": 8,
-      "title": "tt",
-      "amount": -22
-    },
-    {
-      "id": 9,
-      "title": "dd",
-      "amount": -22
-    },
-    {
-      "id": 10,
-      "title": "sex",
-      "amount": -2
-    },
-    {
-      "id": 11,
-      "title": "ff",
-      "amount": -22
+      "title": "Trosak",
+      "amount": -500
     }
   ],
   "budget": {
