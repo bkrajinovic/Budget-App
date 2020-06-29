@@ -1,23 +1,39 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect, useCallback } from "react"
 import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
-import { ExpensesContext } from "../store"
+import axios from "axios"
+
+// import { ExpensesContext } from "../store"
 
 function ExpensesInput() {
-  const { expenses, setValue } = useContext(ExpensesContext)
+  // const { expenses, setValue } = useContext(ExpensesContext)
   const [input, setInput] = useState({
+    id: "",
     title: "",
     amount: "",
   })
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3004/data`).then((res) => {
+  //     setValue(res.data)
+  //   })
+  // })
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    setValue({
-      expenses: [...expenses, { title: input.title, amount: input.amount }],
+    // setValue({
+    //   expenses: [...expenses, { title: input.title, amount: input.amount }],
+    // })
+
+    axios.post("http://localhost:3004/data", input).then((data) => {
+      console.log(data)
     })
-    setInput({ title: "", amount: "" })
+    console.log({ input })
+
+    setInput({ title: "", amount: "", id: "" })
+    window.location.reload()
   }
 
   return (
@@ -49,7 +65,9 @@ function ExpensesInput() {
             className="input"
             placeholder="200"
             value={input.amount}
-            onChange={(e) => setInput({ ...input, amount: e.target.value })}
+            onChange={(e) =>
+              setInput({ ...input, amount: -Math.abs(e.target.value) })
+            }
           />
         </Col>
       </Form.Group>

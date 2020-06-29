@@ -1,9 +1,26 @@
-import React, { useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Table from "react-bootstrap/Table"
+import axios from "axios"
+
 // import { ExpensesContext } from "../store"
 
 function ExpensesTable() {
-  const { value } = useContext(ExpensesContext)
+  // const { value } = useContext(ExpensesContext)
+
+  const [value, setValue] = useState([])
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:3004/data`).then((res) => {
+  //     setValue(res.data)
+  //   })
+  // }, [])
+
+  useEffect(() => {
+    axios.get(`http://localhost:3004/data`).then((response) => {
+      setValue(response.data)
+      console.log(response.data)
+    })
+  }, [])
 
   return (
     <Table bordered hover size="sm">
@@ -13,20 +30,20 @@ function ExpensesTable() {
           <th>Amount</th>
         </tr>
       </thead>
-      {value.expenses.length > 0 ? (
-        value.expenses.map((expense, index) => {
+      {value.length > 0 ? (
+        value.map((expense, index) => {
           return (
             <tbody key={index}>
               <tr>
                 <td>{expense.title}</td>
                 <td
                   style={
-                    expense.amount < 0 ? { color: "green" } : { color: "red" }
+                    expense.amount < 0 ? { color: "red" } : { color: "green" }
                   }
                 >
                   {expense.amount < 0
-                    ? Math.abs(expense.amount)
-                    : -expense.amount}{" "}
+                    ? -Math.abs(expense.amount)
+                    : expense.amount}
                   HRK
                 </td>
               </tr>

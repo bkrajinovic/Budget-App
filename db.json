@@ -2,19 +2,35 @@
   "data": [
     {
       "id": 1,
-      "budget": 10000,
-      "expenses": [
-        {
-          "title": "trosak",
-          "amount": "500"
-        }
-      ],
-      "income": [
-        {
-          "title": "prihod",
-          "amount": "330"
-        }
-      ]
+      "title": "trosak",
+      "amount": -250
+    },
+    {
+      "id": 2,
+      "title": "placa",
+      "amount": 2500
+    },
+    {
+      "id": 3,
+      "title": "trosak",
+      "amount": -5000
+    },
+    {
+      "id": 4,
+      "title": "placa",
+      "amount": 850
+    },
+    {
+      "id": 5,
+      "title": "Marija megic",
+      "amount": -50
     }
-  ]
+  ],
+  "budget": {
+    "amount": 2500
+  },
+  "user": {
+    "email": "Bruno@gmail.com",
+    "password": "bruno"
+  }
 }

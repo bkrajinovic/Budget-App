@@ -3,21 +3,37 @@ import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
-import { ExpensesContext } from "../store"
+import axios from "axios"
+
+// import { ExpensesContext } from "../store"
 
 function IncomeInput() {
-  const { expenses, setValue } = useContext(ExpensesContext)
+  // const { expenses, setValue } = useContext(ExpensesContext)
   const [input, setInput] = useState({
+    id: "",
     title: "",
     amount: "",
   })
 
+  // const neg = (e) => {
+  //   const x = -Math.abs(e)
+  //   console.log(x)
+  // }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    setValue({
-      expenses: [...expenses, { title: input.title, amount:-(input.amount) }],
+    // neg()
+    // setValue({
+    //   expenses: [...expenses, { title: input.title, amount: input.amount }],
+    // })
+
+    axios.post("http://localhost:3004/data", input).then((data) => {
+      console.log(data)
     })
-    setInput({ title: "", amount: "" })
+    console.log({ input })
+
+    setInput({ title: "", amount: 0, id: "" })
+    window.location.reload()
   }
 
   return (
@@ -49,7 +65,9 @@ function IncomeInput() {
             className="input"
             placeholder="200"
             value={input.amount}
-            onChange={(e) => setInput({ ...input, amount: e.target.value })}
+            onChange={(e) =>
+              setInput({ ...input, amount: Number(e.target.value) })
+            }
           />
         </Col>
       </Form.Group>
