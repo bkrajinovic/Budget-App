@@ -78,17 +78,6 @@ function App() {
   )
 }
 
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    fakeAuth.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    fakeAuth.isAuthenticated = false
-    setTimeout(cb, 100)
-  },
-}
 function PrivateRoute({ children, ...rest }) {
   return (
     <Route
@@ -107,6 +96,17 @@ function PrivateRoute({ children, ...rest }) {
       }
     />
   )
+}
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    fakeAuth.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
+  },
+  signout(cb) {
+    fakeAuth.isAuthenticated = false
+    setTimeout(cb, 100)
+  },
 }
 
 function Login() {
@@ -128,10 +128,10 @@ function Login() {
     })
   }
   const pass = () => {
-    if (input.email == user.email && input.password == user.password) {
-      login();
+    if (input.email === user.email && input.password === user.password) {
+      login()
     } else {
-      alert('Wrong password or email')
+      alert("Wrong password or email")
     }
   }
 
@@ -170,7 +170,7 @@ function Login() {
           />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox"></Form.Group>
-        <Button onClick={(pass)}>Log In</Button>
+        <Button onClick={pass}>Log In</Button>
       </Form>
     </div>
   )

@@ -14,6 +14,7 @@ function ExpensesTable() {
   //     setValue(res.data)
   //   })
   // }, [])
+  
 
   useEffect(() => {
     axios.get(`http://localhost:3004/data`).then((response) => {

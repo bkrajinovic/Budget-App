@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
 import axios from "axios"
 
+
 // import { ExpensesContext } from "../store"
 
 function ExpensesInput() {
@@ -20,6 +21,7 @@ function ExpensesInput() {
   //     setValue(res.data)
   //   })
   // })
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,7 +35,6 @@ function ExpensesInput() {
     console.log({ input })
 
     setInput({ title: "", amount: "", id: "" })
-    window.location.reload()
   }
 
   return (
