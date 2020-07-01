@@ -19,6 +19,16 @@
       "id": 4,
       "title": "Trosak",
       "amount": -500
+    },
+    {
+      "id": 5,
+      "title": "Prihod",
+      "amount": 500
+    },
+    {
+      "id": 6,
+      "title": "Veliki trosak",
+      "amount": -1450
     }
   ],
   "budget": {

@@ -20,6 +20,7 @@ import axios from "axios"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import "./components/login.css"
+import Graph from "./components/Graph"
 
 function App() {
   const [budget, setBudget] = useState({})
@@ -67,6 +68,7 @@ function App() {
               <BudgetInfo value={value} />
               <div className="container my-5">
                 <ExpensesTable />
+                <Graph />
               </div>
             </div>
           </div>
@@ -95,6 +97,7 @@ function PrivateRoute({ children, ...rest }) {
     />
   )
 }
+
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
