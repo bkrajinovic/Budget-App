@@ -21,8 +21,26 @@ import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import "./components/login.css"
 import Graph from "./components/Graph"
+import Pdf from "./PdfLoad"
+import { PDFViewer } from "@react-pdf/renderer"
+import { Link } from "react-router-dom"
 
 function App() {
+  let dataURL
+
+  const canToPng = () => {
+    let canvas = document.getElementsByTagName("canvas")
+
+    if (canvas[0] != undefined) {
+      dataURL = canvas[0].toDataURL("image/jpeg")
+    }
+    let png = {
+      src: dataURL,
+    }
+    axios.post("http://localhost:3004/png", png).then((png) => {
+      console.log(png)
+    })
+  }
   const [budget, setBudget] = useState({})
 
   const [value, setValue] = useState({
@@ -68,10 +86,25 @@ function App() {
               <BudgetInfo value={value} />
               <div className="container my-5">
                 <ExpensesTable />
+                <Link to="/pdf">
+                  <Button
+                    onClick={() => canToPng()}
+                    variant="outline-light"
+                    style={{ background: "gray" }}
+                  >
+                    PDF VIEW
+                  </Button>
+                </Link>
                 <Graph />
               </div>
             </div>
           </div>
+        </PrivateRoute>
+        <PrivateRoute path="/pdf">
+          {/* tu pdf veličinu mjenjas */}
+          <PDFViewer height="1300px" width="1000px">
+            <Pdf />
+          </PDFViewer>
         </PrivateRoute>
       </Switch>
     </Router>

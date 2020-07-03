@@ -22,7 +22,6 @@ function Graph() {
       .catch((err) => {
         console.log(err)
       })
-    console.log(title, amount)
     setChartData({
       labels: title,
       datasets: [
