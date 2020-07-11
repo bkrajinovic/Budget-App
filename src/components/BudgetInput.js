@@ -1,13 +1,11 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
-// import { ExpensesContext } from "../store"
 import axios from "axios"
 
 function BudgetInput() {
-  // const { setBudget } = useContext(ExpensesContext)
   const [input, setInput] = useState({
     amount: "",
   })
@@ -19,6 +17,7 @@ function BudgetInput() {
       console.log(data)
     })
     window.location.reload()
+
   }
 
   return (

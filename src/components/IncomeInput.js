@@ -1,32 +1,21 @@
-import React, { useContext, useState } from "react"
+import React, { useState } from "react"
 import Form from "react-bootstrap/Form"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
 import axios from "axios"
 
-// import { ExpensesContext } from "../store"
 
 function IncomeInput() {
-  // const { expenses, setValue } = useContext(ExpensesContext)
   const [input, setInput] = useState({
     id: "",
     title: "",
     amount: "",
   })
 
-  // const neg = (e) => {
-  //   const x = -Math.abs(e)
-  //   console.log(x)
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // neg()
-    // setValue({
-    //   expenses: [...expenses, { title: input.title, amount: input.amount }],
-    // })
-
     axios.post("http://localhost:3004/data", input).then((data) => {
       console.log(data)
     })

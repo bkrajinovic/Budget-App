@@ -1,20 +1,14 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import Table from "react-bootstrap/Table"
 import axios from "axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import '../App.css'
 
-// import { ExpensesContext } from "../store"
 
 function ExpensesTable() {
-  // const { value } = useContext(ExpensesContext)
 
   const [value, setValue] = useState([])
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3004/data`).then((res) => {
-  //     setValue(res.data)
-  //   })
-  // }, [])
-  
 
   useEffect(() => {
     axios.get(`http://localhost:3004/data`).then((response) => {
@@ -22,12 +16,20 @@ function ExpensesTable() {
     })
   }, [])
 
+  const handleDelete = (e) => {
+    axios
+      .delete(`http://localhost:3004/data/${e}`)
+      .then((res) => console.log(res.data))
+    window.location.reload()
+  }
+
   return (
     <Table bordered hover size="sm">
       <thead style={{ backgroundColor: "gray", color: "white" }}>
         <tr>
-          <th>Expenses</th>
+          <th>Incomes/Expenses</th>
           <th>Amount</th>
+          <th>Delete</th>
         </tr>
       </thead>
       {value.length > 0 ? (
@@ -45,6 +47,11 @@ function ExpensesTable() {
                     ? -Math.abs(expense.amount)
                     : expense.amount}
                   HRK
+                </td>
+                <td>
+                  <button className="deleteBtn" onClick={() => handleDelete(expense.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </td>
               </tr>
             </tbody>

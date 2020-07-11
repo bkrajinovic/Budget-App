@@ -1,17 +1,12 @@
 import React from "react"
 import {
   Page,
-  Text,
-  View,
   StyleSheet,
   Document,
   Image,
 } from "@react-pdf/renderer"
-import axios from "axios"
 
-// Create styles
 const styles = StyleSheet.create({
-  // tu stiliziras izgled tablice i canvasa
   page: {
     flexDirection: "row",
     backgroundColor: "white",
@@ -21,12 +16,16 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 1,
   },
-  img:{
-    height: "100px"
-  }
+  img: {
+    height: "100px",
+  },
+  graph: {
+    marginTop: "40%",
+    height: "35%",
+    width: "100%",
+  },
 })
 
-// Create Document Component
 class Pdf extends React.Component {
   constructor(props) {
     super(props)
@@ -44,10 +43,7 @@ class Pdf extends React.Component {
     return (
       <Document>
         <Page size="A4" style={styles.page}>
-          {/* <View style={styles.section}>
-                    <Text>Section #1</Text>
-                </View> */}
-          <Image src={this.state.src} />
+          <Image src={this.state.src} style={styles.graph} />
         </Page>
       </Document>
     )

@@ -1,14 +1,9 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState } from "react"
 import "./styles.css"
 import axios from "axios"
-import { ExpensesContext } from "../store"
 
 function BudgetInfo() {
-  // const { value, budget } = useState(ExpensesContext)
 
-  // const [value, setValue] = useState({
-  //   expenses: [],
-  // })
 
   const [value, setValue] = useState({
     expenses: [],

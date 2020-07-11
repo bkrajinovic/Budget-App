@@ -16,7 +16,8 @@ function Graph() {
 
         for (const dataObj of res.data) {
           title.push(dataObj.title)
-          amount.push(parseInt(dataObj.amount))
+          amount.push(parseInt(dataObj.amount)
+          )
         }
       })
       .catch((err) => {
@@ -40,7 +41,7 @@ function Graph() {
   }, [])
   return (
     <div>
-      <h1>Incomes/Expenses Graph</h1>
+      <h3>Incomes/Expenses Graph</h3>
       <div>
         <Line data={chartData} />
       </div>

@@ -15,7 +15,6 @@ import BudgetInput from "./components/BudgetInput"
 import ExpensesInput from "./components/ExpensesInput"
 import IncomeInput from "./components/IncomeInput"
 import ExpensesTable from "./components/ExpensesTable"
-// import Login from "./components/Login"
 import axios from "axios"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
@@ -31,17 +30,25 @@ function App() {
   const canToPng = () => {
     let canvas = document.getElementsByTagName("canvas")
 
-    if (canvas[0] != undefined) {
-      dataURL = canvas[0].toDataURL("image/jpeg")
+    if (canvas[0] !== undefined) {
+      dataURL = canvas[0].toDataURL()
     }
+
     let png = {
       src: dataURL,
     }
+
     axios.post("http://localhost:3004/png", png).then((png) => {
       console.log(png)
     })
+    window.setTimeout(function () {
+      window.location.reload()
+    }, 500)
   }
-  const [budget, setBudget] = useState({})
+
+  const [budget, setBudget] = useState({
+    budget: 0,
+  })
 
   const [value, setValue] = useState({
     expenses: [],
@@ -86,7 +93,8 @@ function App() {
               <BudgetInfo value={value} />
               <div className="container my-5">
                 <ExpensesTable />
-                <Link to="/pdf">
+                <Graph />
+                <Link to="/pdf" target="_blank">
                   <Button
                     onClick={() => canToPng()}
                     variant="outline-light"
@@ -95,14 +103,13 @@ function App() {
                     PDF VIEW
                   </Button>
                 </Link>
-                <Graph />
               </div>
             </div>
           </div>
         </PrivateRoute>
         <PrivateRoute path="/pdf">
           {/* tu pdf veličinu mjenjas */}
-          <PDFViewer height="1300px" width="1000px">
+          <PDFViewer height="1200px" width="100%">
             <Pdf />
           </PDFViewer>
         </PrivateRoute>
@@ -181,6 +188,7 @@ function Login() {
         <img
           src="https://www.w3schools.com/howto/img_avatar.png"
           id="img"
+          alt="avatar"
         ></img>
         <Form.Group controlId="formBasicEmail">
           <Form.Label
@@ -205,7 +213,7 @@ function Login() {
             Password
           </Form.Label>
           <Form.Control
-            // type="password"
+            type="password"
             name="password"
             placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
             value={input.password}
