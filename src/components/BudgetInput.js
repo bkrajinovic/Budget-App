@@ -10,10 +10,14 @@ function BudgetInput() {
     amount: "",
   })
 
+  let x = JSON.parse(localStorage.getItem("curr"))[0]
+    x = x.email
+  
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setInput({ amount: "" })
-    axios.post("http://localhost:3004/budget", input).then((data) => {
+    axios.post(`http://localhost:3004/${x}Budget`, input).then((data) => {
       console.log(data)
     })
     window.location.reload()

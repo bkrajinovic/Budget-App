@@ -5,7 +5,6 @@ import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
 import axios from "axios"
 
-
 function IncomeInput() {
   const [input, setInput] = useState({
     id: "",
@@ -13,10 +12,12 @@ function IncomeInput() {
     amount: "",
   })
 
+  let x = JSON.parse(localStorage.getItem("curr"))[0]
+  x = x.email
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:3004/data", input).then((data) => {
+    axios.post(`http://localhost:3004/${x}`, input).then((data) => {
       console.log(data)
     })
     console.log({ input })

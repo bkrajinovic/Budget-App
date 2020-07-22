@@ -25,6 +25,7 @@ import { PDFViewer } from "@react-pdf/renderer"
 import { Link } from "react-router-dom"
 
 function App() {
+
   let dataURL
 
   const canToPng = () => {
@@ -53,12 +54,6 @@ function App() {
   const [value, setValue] = useState({
     expenses: [],
   })
-
-  useEffect(() => {
-    axios.get(`http://localhost:3004/data`).then((response) => {
-      setBudget(response.data[0])
-    })
-  }, [])
 
   return (
     <Router>
@@ -91,7 +86,7 @@ function App() {
             <div className="container my-5" id="Info">
               <h4 className="text-center">Your Budget Info</h4>
               <BudgetInfo value={value} />
-              <div className="container my-5">
+              <div className="container my-5" id="pdf">
                 <ExpensesTable />
                 <Graph />
                 <Link to="/pdf" target="_blank">
@@ -108,7 +103,6 @@ function App() {
           </div>
         </PrivateRoute>
         <PrivateRoute path="/pdf">
-          {/* tu pdf veličinu mjenjas */}
           <PDFViewer height="1200px" width="100%">
             <Pdf />
           </PDFViewer>
@@ -142,7 +136,7 @@ const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     fakeAuth.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
+    setTimeout(cb, 100) 
   },
   signout(cb) {
     fakeAuth.isAuthenticated = false
@@ -156,7 +150,7 @@ function Login() {
     password: "",
   })
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState([])
 
   let history = useHistory()
   let location = useLocation()
@@ -169,19 +163,31 @@ function Login() {
       history.replace(from)
     })
   }
+
+  useEffect(() => {
+    axios.get(`http://localhost:3004/users`).then((response) => {
+      setUser(response.data)
+    })
+  }, [])
+
   const pass = () => {
-    if (input.email === user.email && input.password === user.password) {
+    let curr = []
+    for (let i = 0; i < user.length; i++) {
+      if (
+        user[i].email === input.email &&
+        user[i].password === input.password
+      ) {
+        curr.push(user[i])
+      }
+    }
+    if (curr.length > 0) {
+      localStorage.setItem("curr", JSON.stringify(curr))
       login()
     } else {
       alert("Wrong password or email")
     }
   }
 
-  useEffect(() => {
-    axios.get(`http://localhost:3004/user`).then((response) => {
-      setUser(response.data)
-    })
-  }, [])
   return (
     <div id="login">
       <Form className="col-lg-4" id="form">
@@ -221,7 +227,7 @@ function Login() {
           />
         </Form.Group>
         <Form.Group controlId="formBasicCheckbox"></Form.Group>
-        <Button variant="outline-light" onClick={pass}>
+        <Button variant="outline-light" onClick={() => pass()}>
           Log In
         </Button>
       </Form>

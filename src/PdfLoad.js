@@ -1,11 +1,5 @@
 import React from "react"
-import {
-  Page,
-  StyleSheet,
-  Document,
-  Image,
-} from "@react-pdf/renderer"
-
+import { Page, StyleSheet, Document, Image } from "@react-pdf/renderer"
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
@@ -33,6 +27,7 @@ class Pdf extends React.Component {
       src: "",
     }
   }
+
   componentDidMount() {
     fetch("http://localhost:3004/png")
       .then((response) => response.json())

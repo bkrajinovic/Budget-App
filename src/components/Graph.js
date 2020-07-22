@@ -6,34 +6,36 @@ function Graph() {
   const [chartData, setChartData] = useState({})
 
   const chart = () => {
+    let x = JSON.parse(localStorage.getItem("curr"))[0]
+    x = x.email
     let title = []
     let amount = []
 
     axios
-      .get(`http://localhost:3004/data`)
+      .get(`http://localhost:3004/${x}`)
       .then((res) => {
         console.log(res.data)
 
         for (const dataObj of res.data) {
           title.push(dataObj.title)
-          amount.push(parseInt(dataObj.amount)
-          )
+          amount.push(parseInt(dataObj.amount))
         }
+        setChartData({
+          labels: title,
+          datasets: [
+            {
+              label: "Incomes/Expenses",
+              data: amount,
+              backgroundColor: ["rgb(112,128,144)"],
+              borderWidth: 4,
+            },
+          ],
+        })
       })
       .catch((err) => {
         console.log(err)
       })
-    setChartData({
-      labels: title,
-      datasets: [
-        {
-          label: "Incomes/Expenses",
-          data: amount,
-          backgroundColor: ["rgb(112,128,144)"],
-          borderWidth: 4,
-        },
-      ],
-    })
+    
   }
 
   useEffect(() => {

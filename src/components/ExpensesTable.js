@@ -3,22 +3,23 @@ import Table from "react-bootstrap/Table"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import '../App.css'
-
+import "../App.css"
 
 function ExpensesTable() {
-
   const [value, setValue] = useState([])
 
+  let x = JSON.parse(localStorage.getItem("curr"))[0]
+  x = x.email
+
   useEffect(() => {
-    axios.get(`http://localhost:3004/data`).then((response) => {
+    axios.get(`http://localhost:3004/${x}`).then((response) => {
       setValue(response.data)
     })
   }, [])
 
   const handleDelete = (e) => {
     axios
-      .delete(`http://localhost:3004/data/${e}`)
+      .delete(`http://localhost:3004/${x}/${e}`)
       .then((res) => console.log(res.data))
     window.location.reload()
   }
@@ -49,7 +50,10 @@ function ExpensesTable() {
                   HRK
                 </td>
                 <td>
-                  <button className="deleteBtn" onClick={() => handleDelete(expense.id)}>
+                  <button
+                    className="deleteBtn"
+                    onClick={() => handleDelete(expense.id)}
+                  >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>

@@ -10,17 +10,17 @@ function BudgetInfo() {
   })
   const [budget, setBudget] = useState({})
 
-  useEffect(() => {
-    axios.get(`http://localhost:3004/data`).then((response) => {
-      setValue(response.data)
-    })
-  }, [])
-
-  useEffect(() => {
-    axios.get(`http://localhost:3004/budget`).then((response) => {
+  window.onload = function () {
+    let x = JSON.parse(localStorage.getItem("curr"))[0]
+    x = x.email
+    console.log(x)
+    axios.get(`http://localhost:3004/${x}Budget`).then((response) => {
       setBudget(response.data)
     })
-  }, [])
+    axios.get(`http://localhost:3004/${x}`).then((response) => {
+      setValue(response.data)
+    })
+  }
 
   const totalExpenses =
     value.length > 0
