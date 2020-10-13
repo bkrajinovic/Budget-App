@@ -25,7 +25,6 @@ import { PDFViewer } from "@react-pdf/renderer"
 import { Link } from "react-router-dom"
 
 function App() {
-
   let dataURL
 
   const canToPng = () => {
@@ -46,10 +45,6 @@ function App() {
       window.location.reload()
     }, 500)
   }
-
-  const [budget, setBudget] = useState({
-    budget: 0,
-  })
 
   const [value, setValue] = useState({
     expenses: [],
@@ -136,7 +131,7 @@ const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     fakeAuth.isAuthenticated = true
-    setTimeout(cb, 100) 
+    setTimeout(cb, 100)
   },
   signout(cb) {
     fakeAuth.isAuthenticated = false
